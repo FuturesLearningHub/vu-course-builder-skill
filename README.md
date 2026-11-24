@@ -25,4 +25,4 @@ project's `.claude/skills/`.
 
 Related repos: the six course sites (AI_Classroom, AI-Advanced,
 Difficult_Conversations, Coaching-for-Performance, Emotional-Intelligence,
-Presentation-Public-Speaking) and the catalog, me5231979/Course_Library.
+Presentation-Public-Speaking) and the catalog, FuturesLearningHub/FLH-Learning-Library-.

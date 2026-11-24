@@ -6,10 +6,10 @@ description: Build and maintain Vanderbilt FLH Learning Library interactive cour
 # Vanderbilt FLH Learning Library course builder
 
 Every new course is built to match **Working Smarter**, the reference
-implementation. Source: `me5231979/Course_Library`, files `learn/index.html`
+implementation. Source: `FuturesLearningHub/FLH-Learning-Library-`, files `learn/index.html`
 (self-paced) and `learn/classroom/index.html`. Live at
-`https://me5231979.github.io/Course_Library/learn/` and mirrored at
-`https://flh-learning-library.vercel.app/learn/`. That file defines the
+`https://flh-learning-library.vercel.app/learn/` and mirrored at
+`https://futureslearninghub.github.io/FLH-Learning-Library-/learn/`. That file defines the
 standard look, the page architecture, the copy voice, and the interaction
 vocabulary. When a question about structure or styling comes up, the answer
 is whatever Working Smarter does. Read the source, not your memory of it.
@@ -38,7 +38,7 @@ Smarter source repo and replace the content. It already carries the shell,
 the progress engine, the panel router, the fonts, the brand CSS, the
 accessible component patterns, and the classroom / self-paced split.
 
-1. Copy `learn/index.html` from `me5231979/Course_Library` as the starting file, along with `assets/`. Keep the `:root` palette, the theme scopes, the pager, the progress engine, and the accessibility helpers intact. Work the `[EDIT]` banner at the top of the file: it lists every placeholder a new course must swap. If the repo is not reachable, this skill's own `assets/` directory carries the lockups, favicons, and all seven brand fonts.
+1. Copy `learn/index.html` from `FuturesLearningHub/FLH-Learning-Library-` as the starting file, along with `assets/`. Keep the `:root` palette, the theme scopes, the pager, the progress engine, and the accessibility helpers intact. Work the `[EDIT]` banner at the top of the file: it lists every placeholder a new course must swap. If the repo is not reachable, this skill's own `assets/` directory carries the lockups, favicons, and all seven brand fonts.
 2. Map the course to the section spine in `references/pattern.md`: home / hero, belief, the Chancellor's charge, how the course works, then 4 to 8 numbered teaching sections, then knowledge check, summary, next step, resources.
 3. Write the copy section by section. Each section gets a "you are here" line, an eyebrow, a one-italic-word headline, a lead, "The idea", and at least one interactive module.
 4. Build the interactive modules from the vocabulary in `references/pattern.md` (flip cards, drills, builders, graders, matchers, self-checks, simulators). Every one has an accessible recipe in `references/accessibility.md`. Do not invent a new interaction without writing its keyboard and screen reader behavior first.
