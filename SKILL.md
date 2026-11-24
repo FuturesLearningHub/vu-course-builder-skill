@@ -18,7 +18,7 @@ Each course is one self-contained HTML file: inline styles, inline scripts,
 no framework, no build step, no backend. Assets and fonts live in
 `./assets/`.
 
-Two things are non-negotiable on every course this skill produces:
+Four things are non-negotiable on every course this skill produces:
 
 1. **It matches the Working Smarter pattern.** Not a new layout, not a new
    navigation model. See `references/pattern.md`.
@@ -28,7 +28,7 @@ Two things are non-negotiable on every course this skill produces:
    three typefaces, per `brand.vanderbilt.edu`. There is no approved red, so
    state is carried by words and icons. See `references/brand.md`.
 4. **It carries the Chancellor's charge.** The `mission` section is required in
-   every course, verbatim, with two course-specific slots. See
+   every course, verbatim, with three course-specific slots. See
    `references/mission.md`.
 
 ## Starting a new course
@@ -43,9 +43,9 @@ accessible component patterns, and the classroom / self-paced split.
 3. Write the copy section by section. Each section gets a "you are here" line, an eyebrow, a one-italic-word headline, a lead, "The idea", and at least one interactive module.
 4. Build the interactive modules from the vocabulary in `references/pattern.md` (flip cards, drills, builders, graders, matchers, self-checks, simulators). Every one has an accessible recipe in `references/accessibility.md`. Do not invent a new interaction without writing its keyboard and screen reader behavior first.
 5. Write the classroom-only layer: the instructor how-to, the QR panel, and the gold **Together** cards. The self-paced edition drops them.
-6. Drop in the `mission` section from `references/mission.md` and fill its two slots. Do not rewrite the rest of it.
+6. Drop in the `mission` section from `references/mission.md` and fill its three slots. Do not rewrite the rest of it.
 7. Write `facilitator/notes.json` if the course is facilitated (see the runbook reference).
-8. Run the accessibility and palette gate. It blocks publish.
+8. Copy the two audit scripts from this skill's `scripts/` folder into the course's `tools/` folder (see below), then run the accessibility and palette gate. It blocks publish.
 9. Publish, then add the library card and syllabus.
 
 ## Design system in one paragraph
@@ -100,7 +100,14 @@ lengths. Schema and timing rules: `references/facilitator.md`.
 ## Accessibility gate (blocks publish)
 
 No course ships until all of these pass. Details, component recipes, and the
-scripts are in `references/accessibility.md`.
+script setup are in `references/accessibility.md`.
+
+The two scripts ship with this skill in `scripts/`. Copy them into the course
+first (`mkdir -p tools && cp <skill-dir>/scripts/a11y-audit.mjs
+<skill-dir>/scripts/contrast-check.py tools/`, where `<skill-dir>` is
+usually `~/.claude/skills/vu-course-builder`). The audit needs
+`npm i -D playwright @axe-core/playwright` once. It finds the pages on its
+own, so there is no section list to edit.
 
 1. `node tools/a11y-audit.mjs` reports zero critical and zero serious axe violations across every section and panel, at 1440x900 and at 320px wide.
 2. `python3 tools/contrast-check.py` reports no raw-palette text usage and no scoped pairing under 4.5:1, in both theme scopes.
@@ -116,8 +123,10 @@ passed.
 
 ## Testing before publish
 
-Serve locally (`python3 -m http.server`) and run Playwright (Chromium at
-`/opt/pw-browsers/`, `--no-sandbox`) to verify: every interactive module
+Serve locally (`python3 -m http.server`) and run Playwright (in the cloud
+image Chromium is at `/opt/pw-browsers/` with `--no-sandbox`; on a Mac set
+`CHROME_PATH` to installed Chrome or run `npx playwright install chromium`)
+to verify: every interactive module
 round-trips, panel routing works from a cold URL, the progress rail marks and
 resets, the classroom-only layer is absent from the self-paced edition, and
 the console is clean (ignore TUNNEL/net:: noise). Also grep for em dashes and
@@ -125,10 +134,11 @@ for classroom-only markers leaking into the self-paced build.
 
 ## Reference files
 
-- `references/mission.md` - the required Chancellor's charge section, verbatim, with its two course-specific slots.
+- `references/mission.md` - the required Chancellor's charge section, verbatim, with its three course-specific slots and examples from shipped courses.
 - `references/pattern.md` - the Working Smarter section and panel architecture, the module vocabulary, classroom vs self-paced, progress and privacy contract.
 - `references/accessibility.md` - the WCAG 2.2 AA contract, an accessible recipe for every interaction type, the audit scripts, and the ship gate.
 - `references/brand.md` - color tokens with verified contrast ratios, type stack, component classes, motion rules.
 - `references/facilitator.md` - notes.json schema, timing invariants, briefing page, printable guide, slide screenshot workflow.
 - `references/library.md` - catalog card, filter topics, skills and core competencies, syllabus, length badge format.
+- `scripts/a11y-audit.mjs`, `scripts/contrast-check.py` - the gate scripts. Copy them into the course's `tools/`.
 - `references/deck.md` - **legacy**. The horizontal 100vw slide deck used by the older course repos. Read it only when editing one of those; never build a new course this way.
