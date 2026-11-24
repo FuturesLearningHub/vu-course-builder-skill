@@ -1,6 +1,6 @@
-# FLH brand system
+# Vanderbilt brand system
 
-The series uses Vanderbilt's FLH identity. Everything below already exists in
+The series uses the Vanderbilt identity. Everything below already exists in
 each course's `assets/css/styles.css`; when starting from a cloned sibling
 repo you keep it and only write new component styles on top.
 
@@ -52,11 +52,47 @@ All transitions and animations run 400ms or less, eased. Honor
 montage streams from the Higgsfield CDN with a particle-canvas fallback when
 the video cannot load.
 
-## Lockups and bundled assets
+## Vanderbilt identity (required on everything)
 
-Use real Vanderbilt University lockups only (authorized use); the white
-wordmark sits in the top nav, and the footer carries the small lockup inside
-the closing slide.
+Every course page, slide deck, landing page and demo carries the real
+Vanderbilt University lockup. Never draw, retype or recolor the logo; use the
+bundled PNGs. Vanderbilt is the only name on the page as the maker. Never
+credit Futures Learning, FLH or Futures Learning Hub as the maker, owner,
+publisher or brand, in visible text or in `<title>`, meta tags, alt text,
+`aria-label`s or the copyright line.
+
+**Header lockup.** The top bar opens with the logo, a 1px gold divider, then
+the program or course name in Antonio, gold, all caps:
+
+```html
+<a class="logo" href="#top" aria-label="Vanderbilt University, <Course> home">
+  <img src="assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43">
+  <span class="lockup-div" aria-hidden="true"></span>
+  <span class="lockup-name"><Program or course name></span>
+</a>
+```
+
+```css
+.logo{ display:flex; align-items:center; gap:14px; min-width:0; text-decoration:none; }
+.logo img{ height:48px; width:auto; display:block; flex:none; }   /* 30px in a compact toolbar */
+.lockup-div{ width:1px; align-self:stretch; min-height:22px; background:var(--vu-oak); flex:none; }
+.lockup-name{ font-family:var(--cond); font-weight:700; font-size:.95rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--vu-gold); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+@media (max-width:520px){ .lockup-div, .lockup-name{ display:none; } }
+```
+
+**Hero eyebrow.** `Vanderbilt University &middot; <Program or course name>`.
+
+**Footer.** The stacked lockup (`vu-centered-white.png`, about 100px wide) and
+`&copy; <year> Vanderbilt University.` beside the accessibility statement.
+
+**Slide decks.** The lockup sits in the presenter toolbar, on the title slide
+(white lockup on a dark slide) and on the closing slide (black lockup on a
+light slide). In a narrow reflowed toolbar, swap to `vu-v-icon-nav.png`.
+
+**Light grounds** take `vu-lockup-black.png` / `vu-centered-black.png`.
+
+## Bundled assets
 
 The skill bundles the brand assets in its own `assets/` directory in case no
 sibling course repo is available to clone from:

@@ -1,7 +1,7 @@
 # vu-course-builder
 
 A Claude skill for building Vanderbilt Learning Series ("Learning on Demand")
-interactive course sites: FLH brand, three editions per course (classroom,
+interactive course sites: Vanderbilt brand and logo, three editions per course (classroom,
 self-paced web, facilitator), book-mode page navigation (the Working Smarter pattern), ATD
 facilitator runbooks, Kirkpatrick/Bloom learning architecture, and
 Course_Library catalog integration.
@@ -12,7 +12,7 @@ Course_Library catalog integration.
 - `references/pattern.md` - the Working Smarter section spine, pager contract, module vocabulary, classroom vs self-paced, progress and privacy
 - `references/accessibility.md` - WCAG 2.2 AA rules, an accessible recipe per interaction type, the audit scripts, the ship gate
 - `references/mission.md` - the required Chancellor's charge section with its three slots
-- `references/brand.md` - FLH color tokens, type stack, components, motion
+- `references/brand.md` - Vanderbilt identity, color tokens, type stack, components, motion
 - `references/facilitator.md` - notes.json schema, briefing page, printable guide
 - `references/library.md` - catalog cards, skill pills, core competencies, syllabi
 - `references/deck.md` - legacy horizontal deck CSS/JS contracts

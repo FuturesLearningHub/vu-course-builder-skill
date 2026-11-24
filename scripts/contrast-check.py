@@ -202,6 +202,14 @@ def check_raw_palette_in_components():
         # on them and their pairs are measured under "fac-rail" in PAIRS above
         ".facnote", ".facshow", ".fac__badge", ".brief__", "#briefing",
         ".t-say", ".t-do", ".t-ask", ".t-deb", ".t-tra", "body.fac",
+        # Working Smarter chrome that is always on black whatever page is
+        # showing: the progress button and panel, the mobile menu's progress
+        # line, the Oracle completion modal, and the closing section (.cta is
+        # always th-dark in the section spine)
+        ".prog-btn", ".prog-panel", ".prog-list", ".prog-warn", ".pp-h", ".mprog",
+        ".oracle-", ".cta",
+        # the header lockup's divider and program name sit in the black top nav
+        ".lockup-",
     )
     for page in PAGES:
         path = ROOT / page
@@ -283,6 +291,33 @@ NEUTRAL_OK = {"#bdbdbd", "#a3a3a3", "#262624", "#212120", "#141414",
               "#555555", "#6e6e6e", "#63615c", "#d6d6d6", "#4f4f4f",
               "#efe0c4", "#e0d5c0"}
 
+def check_identity():
+    """Vanderbilt is the only maker. The lockup is present, and no learner-visible
+    text, title, meta, alt or aria-label credits Futures Learning or FLH."""
+    fails = []
+    print()
+    print("Vanderbilt identity")
+    print("-" * 72)
+    bad = re.compile(r"futures\s*learning|\bFLH\b", re.I)
+    for page in PAGES:
+        path = ROOT / page
+        if not path.exists():
+            continue
+        html = re.sub(r"<!--.*?-->", "", path.read_text(encoding="utf-8"), flags=re.S)
+        html = re.sub(r"/\*.*?\*/", "", html, flags=re.S)
+        hits = sorted({m.group(0) for m in bad.finditer(html)})
+        before = len(fails)
+        if hits:
+            fails.append(page)
+            print(f"  FAIL  {page}: names {', '.join(hits)}; Vanderbilt is the only maker on the page")
+        if not re.search(r'<img[^>]+vu-(lockup|centered)-(white|black)\.png', html):
+            fails.append(page)
+            print(f"  FAIL  {page}: no Vanderbilt lockup image (assets/img/vu-lockup-*.png)")
+        if len(fails) == before:
+            print(f"  PASS  {page}: Vanderbilt lockup present, no maker credit")
+    return fails
+
+
 if __name__ == "__main__":
     parse_args(sys.argv[1:])
     present = [p for p in PAGES if (ROOT / p).exists()]
@@ -291,10 +326,11 @@ if __name__ == "__main__":
         sys.exit(1)
     print(f"Checking {', '.join(present)} under {ROOT}\n")
     failures = (check_pairs() + check_palette()
-                + check_raw_palette_in_components() + check_tints_are_dark_only())
+                + check_raw_palette_in_components() + check_tints_are_dark_only()
+                + check_identity())
     print()
     if failures:
         print(f"GATE FAILED: {len(failures)} problem(s).")
         sys.exit(1)
-    print("GATE PASSED: contrast and palette are clean.")
+    print("GATE PASSED: contrast, palette and Vanderbilt identity are clean.")
     sys.exit(0)

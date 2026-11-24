@@ -1,6 +1,6 @@
 ---
 name: vu-course-builder
-description: Build and maintain Vanderbilt FLH Learning Library interactive course sites. Use this whenever the user asks to create a new course, training, workshop, learning module, or classroom experience for the Vanderbilt series, or to edit an existing one (Working Smarter, AI Basics, AI 201, Difficult Conversations, Coaching for Performance, Emotional Intelligence, Presentation & Public Speaking), or mentions the course library, facilitator guides, self-paced editions, FLH brand, the black-and-gold Vanderbilt look, or accessibility of a course site. Covers the full pipeline: the Working Smarter section pattern, copy, interactive modules, classroom and self-paced editions, ATD facilitator runbook, WCAG 2.2 AA accessibility gate, publishing, and the library catalog card.
+description: Build and maintain Vanderbilt FLH Learning Library interactive course sites. Use this whenever the user asks to create a new course, training, workshop, learning module, or classroom experience for the Vanderbilt series, or to edit an existing one (Working Smarter, AI Basics, AI 201, Difficult Conversations, Coaching for Performance, Emotional Intelligence, Presentation & Public Speaking), or mentions the course library, facilitator guides, self-paced editions, the Vanderbilt brand or logo, the black-and-gold Vanderbilt look, or accessibility of a course site. Covers the full pipeline: the Working Smarter section pattern, copy, interactive modules, classroom and self-paced editions, ATD facilitator runbook, WCAG 2.2 AA accessibility gate, publishing, and the library catalog card.
 ---
 
 # Vanderbilt FLH Learning Library course builder
@@ -18,7 +18,7 @@ Each course is one self-contained HTML file: inline styles, inline scripts,
 no framework, no build step, no backend. Assets and fonts live in
 `./assets/`.
 
-Four things are non-negotiable on every course this skill produces:
+Five things are non-negotiable on every course this skill produces:
 
 1. **It matches the Working Smarter pattern.** Not a new layout, not a new
    navigation model. See `references/pattern.md`.
@@ -30,6 +30,14 @@ Four things are non-negotiable on every course this skill produces:
 4. **It carries the Chancellor's charge.** The `mission` section is required in
    every course, verbatim, with three course-specific slots. See
    `references/mission.md`.
+5. **It carries the Vanderbilt logo and no maker credit.** Every page, deck
+   and site shows the real Vanderbilt University lockup in the header lockup
+   pattern (logo, thin gold divider, program name). Nothing a learner can see
+   names Futures Learning, FLH or Futures Learning Hub as the maker, owner or
+   brand: not the title, meta description, eyebrow, nav, footer, copyright
+   line, credits or alt text. The repo names in this skill are for builders
+   only and never appear on the page. See "Vanderbilt identity" in
+   `references/brand.md`.
 
 ## Starting a new course
 
@@ -38,7 +46,7 @@ Smarter source repo and replace the content. It already carries the shell,
 the progress engine, the panel router, the fonts, the brand CSS, the
 accessible component patterns, and the classroom / self-paced split.
 
-1. Copy `learn/index.html` from `FuturesLearningHub/FLH-Learning-Library-` as the starting file, along with `assets/`. Keep the `:root` palette, the theme scopes, the pager, the progress engine, and the accessibility helpers intact. Work the `[EDIT]` banner at the top of the file: it lists every placeholder a new course must swap. If the repo is not reachable, this skill's own `assets/` directory carries the lockups, favicons, and all seven brand fonts.
+1. Copy `learn/index.html` from `FuturesLearningHub/FLH-Learning-Library-` as the starting file, along with `assets/`. Replace every learner-visible "FLH Learning Library" or Futures Learning string with the Vanderbilt identity in `references/brand.md` (the source still carries some). Keep the `:root` palette, the theme scopes, the pager, the progress engine, and the accessibility helpers intact. Work the `[EDIT]` banner at the top of the file: it lists every placeholder a new course must swap. If the repo is not reachable, this skill's own `assets/` directory carries the lockups, favicons, and all seven brand fonts.
 2. Map the course to the section spine in `references/pattern.md`: home / hero, belief, the Chancellor's charge, how the course works, then 4 to 8 numbered teaching sections, then knowledge check, summary, next step, resources.
 3. Write the copy section by section. Each section gets a "you are here" line, an eyebrow, a one-italic-word headline, a lead, "The idea", and at least one interactive module.
 4. Build the interactive modules from the vocabulary in `references/pattern.md` (flip cards, drills, builders, graders, matchers, self-checks, simulators). Every one has an accessible recipe in `references/accessibility.md`. Do not invent a new interaction without writing its keyboard and screen reader behavior first.
@@ -50,7 +58,7 @@ accessible component patterns, and the classroom / self-paced split.
 
 ## Design system in one paragraph
 
-Vanderbilt FLH brand: black `#1C1C1C`, white, Flat Gold `#CFAE70`, and Oak
+Vanderbilt brand: black `#1C1C1C`, white, Flat Gold `#CFAE70`, and Oak
 `#946E24` where gold cannot survive a white ground. The approved palette is
 fourteen colors and nothing else; `#A94438` and `#8C6822` are in the current
 source and are both off-brand. Headlines are Libre Caslon with exactly **one
@@ -117,6 +125,7 @@ own, so there is no section list to edit.
 6. Zoom and reflow: 200% zoom and 320px width with no horizontal scrolling and no clipped content.
 7. Every video has captions and a link out; no autoplay with sound.
 8. The footer carries the accessibility statement and a contact address.
+9. The Vanderbilt lockup is in the header and footer (and on the title and closing slides of a deck), and `python3 tools/contrast-check.py` reports no Futures Learning or FLH maker credit anywhere on the page.
 
 Record the run in the course README so the next session knows when it last
 passed.

@@ -180,7 +180,8 @@ content grows.
 ## 5. Chrome around the page
 
 - **Skip link** `a.skip` to `#main`, first in `<body>`.
-- **Top nav** `header.nav`: lockup (`alt="Vanderbilt University"`, link
+- **Top nav** `header.nav`: the header lockup (Vanderbilt logo, gold
+  divider, course name; see "Vanderbilt identity" in `brand.md`; link
   labelled "Vanderbilt University, <Course> home"), section links, the gold
   Knowledge check button, the Progress button (`aria-expanded`,
   `aria-controls="progPanel"`), and the menu button.
